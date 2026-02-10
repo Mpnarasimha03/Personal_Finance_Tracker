@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction History - Personal Finance Tracker</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>Finance Tracker</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/index.html" class="nav-link">Dashboard</a>
+                <a href="/transactions.html" class="nav-link active">Transactions</a>
+                <a href="#" class="nav-link" id="logoutBtn">Logout</a>
+            </div>
+            <div class="user-info">
+                <span id="userGreeting"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="dashboard-header">
+            <h2>Transaction History</h2>
+        </div>
+
+        <div class="card">
+            <div class="filters">
+                <h3>Filter Transactions</h3>
+                <div class="filter-controls">
+                    <div class="form-group">
+                        <label for="filterType">Type</label>
+                        <select id="filterType">
+                            <option value="all">All Transactions</option>
+                            <option value="expense">Expenses Only</option>
+                            <option value="income">Income Only</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="filterCategory">Category</label>
+                        <select id="filterCategory">
+                            <option value="">All Categories</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Dining Out">Dining Out</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="searchQuery">Search</label>
+                        <input type="text" id="searchQuery" placeholder="Search description...">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate">
+                    </div>
+                    <button id="applyFilters" class="btn btn-primary">Apply Filters</button>
+                    <button id="resetFilters" class="btn btn-secondary">Reset</button>
+                </div>
+            </div>
+
+            <div class="transactions-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Category/Source</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionsList">
+                        <tr>
+                            <td colspan="6" class="no-data">Loading transactions...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle">Edit Transaction</h3>
+            <form id="editForm" class="form">
+                <input type="hidden" id="editId">
+                <input type="hidden" id="editType">
+
+                <div class="form-group">
+                    <label for="editAmount">Amount</label>
+                    <input type="number" id="editAmount" step="0.01" required>
+                </div>
+                <div class="form-group" id="editCategoryGroup">
+                    <label for="editCategory">Category</label>
+                    <select id="editCategory">
+                        <option value="Groceries">Groceries</option>
+                        <option value="Utilities">Utilities</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Dining Out">Dining Out</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" id="editSourceGroup" style="display:none;">
+                    <label for="editSource">Source</label>
+                    <input type="text" id="editSource">
+                </div>
+                <div class="form-group">
+                    <label for="editDate">Date</label>
+                    <input type="date" id="editDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editDescription">Description</label>
+                    <textarea id="editDescription" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-secondary" id="cancelEdit">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/transactions.js"></script>
+</body>
+</html>

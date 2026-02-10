@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Tracker - Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>Finance Tracker</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="/index.html" class="nav-link active">Dashboard</a>
+                <a href="/transactions.html" class="nav-link">Transactions</a>
+                <a href="#" class="nav-link" id="logoutBtn">Logout</a>
+            </div>
+            <div class="user-info">
+                <span id="userGreeting"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-content">
+        <div class="dashboard-header">
+            <h2>Welcome to Your Dashboard</h2>
+            <p class="date-display" id="currentDate"></p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Total Income</h3>
+                <p class="stat-value" id="totalIncome">$0.00</p>
+                <span class="stat-label">This month</span>
+            </div>
+            <div class="stat-card">
+                <h3>Total Expenses</h3>
+                <p class="stat-value" id="totalExpenses">$0.00</p>
+                <span class="stat-label">This month</span>
+            </div>
+            <div class="stat-card">
+                <h3>Balance</h3>
+                <p class="stat-value" id="balance">$0.00</p>
+                <span class="stat-label">Current balance</span>
+            </div>
+            <div class="stat-card">
+                <h3>Budget Status</h3>
+                <p class="stat-value" id="budgetStatus">0%</p>
+                <span class="stat-label">Budget utilized</span>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Add Expense Section -->
+            <div class="card">
+                <h3>Add New Expense</h3>
+                <form id="expenseForm" class="form">
+                    <div class="form-group">
+                        <label for="expenseAmount">Amount</label>
+                        <input type="number" id="expenseAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseCategory">Category</label>
+                        <select id="expenseCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Dining Out">Dining Out</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDate">Date</label>
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expenseDescription">Description (Optional)</label>
+                        <textarea id="expenseDescription" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Expense</button>
+                </form>
+            </div>
+
+            <!-- Add Income Section -->
+            <div class="card">
+                <h3>Add New Income</h3>
+                <form id="incomeForm" class="form">
+                    <div class="form-group">
+                        <label for="incomeAmount">Amount</label>
+                        <input type="number" id="incomeAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeSource">Source</label>
+                        <input type="text" id="incomeSource" placeholder="e.g., Salary, Freelance" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeFrequency">Frequency</label>
+                        <select id="incomeFrequency" required>
+                            <option value="ONE_TIME">One Time</option>
+                            <option value="DAILY">Daily</option>
+                            <option value="WEEKLY">Weekly</option>
+                            <option value="BIWEEKLY">Bi-Weekly</option>
+                            <option value="MONTHLY">Monthly</option>
+                            <option value="QUARTERLY">Quarterly</option>
+                            <option value="YEARLY">Yearly</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeDate">Date</label>
+                        <input type="date" id="incomeDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="incomeRecurring">
+                            Recurring Income
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="incomeDescription">Description (Optional)</label>
+                        <textarea id="incomeDescription" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Income</button>
+                </form>
+            </div>
+
+            <div class="card full-width">
+                <h3>Budget Management</h3>
+                <form id="budgetForm" class="form inline-form">
+                    <div class="form-group">
+                        <label for="budgetCategory">Category</label>
+                        <select id="budgetCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="Groceries">Groceries</option>
+                            <option value="Utilities">Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Dining Out">Dining Out</option>
+                            <option value="Healthcare">Healthcare</option>
+                            <option value="Shopping">Shopping</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budgetAmount">Budget Amount</label>
+                        <input type="number" id="budgetAmount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="budgetMonth">Month</label>
+                        <select id="budgetMonth" required>
+                            <option value="1">January</option>
+                            <option value="2">February</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="budgetYear">Year</label>
+                        <input type="number" id="budgetYear" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Set Budget</button>
+                </form>
+
+                <div id="budgetProgress" class="budget-progress-container">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/auth.js"></script>
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
