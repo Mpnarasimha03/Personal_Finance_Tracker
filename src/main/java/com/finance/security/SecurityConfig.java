@@ -30,13 +30,13 @@ public class SecurityConfig {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    // 🔐 Password encoder
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // 🔐 Authentication provider
+   
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
@@ -45,14 +45,14 @@ public class SecurityConfig {
         return authProvider;
     }
 
-    // 🔐 Authentication manager
+    
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authConfig) throws Exception {
         return authConfig.getAuthenticationManager();
     }
 
-    // 🔐 Main security configuration
+    
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -64,7 +64,7 @@ public class SecurityConfig {
             )
             .authorizeHttpRequests(auth -> auth
 
-                // 🌍 PUBLIC HTML PAGES
+               
                 .requestMatchers(
                     "/",
                     "/index.html",
@@ -73,7 +73,7 @@ public class SecurityConfig {
                     "/transactions.html"
                 ).permitAll()
 
-                // 🎨 STATIC RESOURCES
+               
                 .requestMatchers(
                     "/css/**",
                     "/js/**",
@@ -81,27 +81,27 @@ public class SecurityConfig {
                     "/favicon.ico"
                 ).permitAll()
 
-                // 🧪 ERROR + BROWSER REQUESTS
+                
                 .requestMatchers(
                     "/error",
                     "/.well-known/**"
                 ).permitAll()
 
-                // 🔓 AUTH APIs (login/register)
+                
                 .requestMatchers("/api/auth/**").permitAll()
 
-                // ✅ IMPORTANT: allow HTML, protect APIs via JWT filter
+                
                 .anyRequest().permitAll()
             );
 
-        // 🔐 JWT filter
+       
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    // 🌐 CORS configuration
+    
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();

@@ -62,25 +62,9 @@ CREATE TABLE IF NOT EXISTS budgets (
     UNIQUE KEY unique_user_category_month_year (user_id, category, month, year)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample Data (Optional - for testing)
 
--- Insert a test user (password: "password123" - hashed with BCrypt)
--- You should register through the application instead of inserting directly
--- INSERT INTO users (email, password, full_name, email_verified) VALUES
--- ('test@example.com', '$2a$10$XYZ...', 'Test User', TRUE);
 
--- Sample categories for reference
--- Common expense categories:
--- - Groceries
--- - Utilities
--- - Entertainment
--- - Transportation
--- - Dining Out
--- - Healthcare
--- - Shopping
--- - Other
 
--- Views for reporting (Optional)
 
 -- Monthly expense summary view
 CREATE OR REPLACE VIEW monthly_expense_summary AS
@@ -164,27 +148,3 @@ END //
 
 DELIMITER ;
 
--- Indexes for performance optimization
--- Already created above, but listed here for reference:
--- - users: idx_email
--- - expenses: idx_user_id, idx_category, idx_transaction_date
--- - incomes: idx_user_id, idx_transaction_date
--- - budgets: idx_user_id, idx_month_year
-
--- Database maintenance commands
-
--- To backup the database:
--- mysqldump -u username -p finance_tracker > finance_tracker_backup.sql
-
--- To restore the database:
--- mysql -u username -p finance_tracker < finance_tracker_backup.sql
-
--- To optimize tables periodically:
--- OPTIMIZE TABLE users, expenses, incomes, budgets;
-
--- Notes:
--- 1. The application uses Spring Data JPA with ddl-auto=update
---    which will create tables automatically
--- 2. This SQL file is for reference and manual database setup if needed
--- 3. Make sure to use strong passwords and never commit credentials to version control
--- 4. Regular backups are recommended for production use
